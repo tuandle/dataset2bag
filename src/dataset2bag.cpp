@@ -138,10 +138,14 @@ std::vector<ros::Time> loadTimestamps(const std::string& filename) {
     std::cout <<"sec " << sec <<" nsec " << nsec << std::endl;
     timestamps.push_back(ros::Time(sec, nsec));*/
 
-    std::istringstream timestamp_string(ss.str());
+    std::istringstream timestamp_string(ss.str().substr(0, 10) +
+                                        ss.str().substr(11, 9));
 
+    //std::cout << timestamp_string.str() << std::endl;
     uint64_t time_ns;
     timestamp_string >> time_ns;
+
+    //std::cout << time_ns << std::endl;
 
     ros::Time timeToRos;
     timeToRos.fromNSec(time_ns);
